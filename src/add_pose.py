@@ -9,8 +9,29 @@ ODOMETRY_NOISE = gtsam.noiseModel.Diagonal.Sigmas(np.array([0.2, 0.2, 0.1]))  # 
 MEASUREMENT_NOISE = gtsam.noiseModel.Diagonal.Sigmas(np.array([0.05, 0.1]))  # (bearing, range)
 
 def add_pose(graph, initial_estimate):
+    
     # TODO: Add the odometry factor between X(4) and X(5) to the graph (BetweenFactorPose2)
+    graph.add(
+        gtsam.BetweenFactorPose2(
+            X(3),
+            X(4),
+            gtsam.Pose2(
+                math.sqrt(2),   # dx
+                math.sqrt(2),   # dy
+                math.pi/2       # 90 degrees total rotation
+            ),
+            ODOMETRY_NOISE
+        )
+    )
 
     # TODO: Based on the odometry, find the initial estimate for the pose of X(5) and add it to the graph
-    
+    initial_estimate.insert(
+            X(4),
+            gtsam.Pose2(
+                4 + math.sqrt(2),  # x ≈ 5.414
+                math.sqrt(2),      # y ≈ 1.414
+                math.pi/2          # facing upward
+            )
+        )
+
     return graph, initial_estimate

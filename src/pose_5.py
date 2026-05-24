@@ -35,10 +35,18 @@ def add_landmark_measurement(graph, result, pose_5, landmark):
     return graph
 
 def optimize(graph, initial_estimate):
-    # TODO: Initialize the optimizer 
+    # TODO: Initialize the optimizer DONE 
+    params = gtsam.LevenbergMarquardtParams()
+    # Creating the optimizer instance, providing the graph, initial estimate, and parameters.
+    optimizer = gtsam.LevenbergMarquardtOptimizer(graph, initial_estimate, params)
+    # Running the optimization
+    result = optimizer.optimize()
+    # Print the optimized result
 
 
     # TODO: Perform the optimization and print the result
+
+    print("\nFinal Result:\n{}".format(result))
 
     return result
 
