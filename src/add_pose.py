@@ -10,7 +10,7 @@ MEASUREMENT_NOISE = gtsam.noiseModel.Diagonal.Sigmas(np.array([0.05, 0.1]))  # (
 
 def add_pose(graph, initial_estimate):
     
-    # TODO: Add the odometry factor between X(4) and X(5) to the graph (BetweenFactorPose2)
+    # TODO: Add the odometry factor between X(3) and X(4) to the graph (BetweenFactorPose2)
     graph.add(
         gtsam.BetweenFactorPose2(
             X(3),

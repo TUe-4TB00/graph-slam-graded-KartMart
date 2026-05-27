@@ -104,8 +104,8 @@ def minimize_marginals(graph, initial_estimate, pose_options):
 
 def minimize_errors(graph, initial_estimate, pose_options):
     #TODO: try different pose and landmark options here, and keep the one with the lowest resulting error.
-    best_pose = "a"      # chosen pose option
-    best_landmark = 1    # chosen landmark (1 or 2)
+    best_pose = "b"      # chosen pose option
+    best_landmark = 2  # chosen landmark (1 or 2)
     pose_5 = pose_options[best_pose]
     graph, initial_estimate = add_pose(graph, initial_estimate, pose_5)
     result = optimize(graph, initial_estimate)
@@ -113,7 +113,52 @@ def minimize_errors(graph, initial_estimate, pose_options):
     result = optimize(graph, initial_estimate)
 
     # TODO: create a list of errors (each index corresponds to a pose) and add the error of each pose to the list
-    list_of_errors = []
+
+
+    X_1_real = gtsam.Pose2(0, 0, 0)
+
+    X_2_real = gtsam.Pose2(2, 0, 0)
+
+    X_3_real = gtsam.Pose2(4, 0, 0)
+
+    # x_errorx1 = abs(result.atPose2(X(1)).x()-initial_estimate.atPose2(X(1)).x())
+    # y_errorx1  = abs(result.atPose2(X(1)).y()-initial_estimate.atPose2(X(1)).y())
+    # theta_errorx1  = abs(result.atPose2(X(1)).theta()-initial_estimate.atPose2(X(1)).theta())
+
+    # x_errorx2 = abs(result.atPose2(X(2)).x()-initial_estimate.atPose2(X(2)).x())
+    # y_errorx2  = abs(result.atPose2(X(2)).y()-initial_estimate.atPose2(X(2)).y())
+    # theta_errorx2  = abs(result.atPose2(X(2)).theta()-initial_estimate.atPose2(X(2)).theta())
+
+    # x_errorx3 = abs(result.atPose2(X(3)).x()-initial_estimate.atPose2(X(3)).x())
+    # y_errorx3  = abs(result.atPose2(X(3)).y()-initial_estimate.atPose2(X(3)).y())
+    # theta_errorx3  = abs(result.atPose2(X(3)).theta()-initial_estimate.atPose2(X(3)).theta())
+
+
+    x_errorx1 = abs(result.atPose2(X(1)).x() - X_1_real.x())
+    y_errorx1  = abs(result.atPose2(X(1)).y()-X_1_real.y())
+    theta_errorx1  = abs(result.atPose2(X(1)).theta()-X_1_real.theta())
+
+    x_errorx2 = abs(result.atPose2(X(2)).x()- X_2_real.x())
+    y_errorx2  = abs(result.atPose2(X(2)).y()- X_2_real.y())
+    theta_errorx2  = abs(result.atPose2(X(2)).theta()-X_2_real.theta())
+
+    x_errorx3 = abs(result.atPose2(X(3)).x()-X_3_real.x())
+    y_errorx3  = abs(result.atPose2(X(3)).y()-X_3_real.y())
+    theta_errorx3  = abs(result.atPose2(X(3)).theta()-X_3_real.theta())
+
+
+    error_total_in_X = x_errorx1 + x_errorx2 + x_errorx3
+    error_total_in_Y = y_errorx1 + y_errorx2 + y_errorx3
+    error_total_in_theta = theta_errorx1 + theta_errorx2 + theta_errorx3
+
+    error = [error_total_in_X, error_total_in_Y, error_total_in_theta ]
+    #THIS GIVES ME ERROR IN X Y AND THETA for pos A and landmark 1
+
+    print("ERROR:", error)
+    #list_of_errors = []
+
     # TODO: compute the sum of the errors and return it along with the best pose and landmark
-    sum_of_errors = 0
+
+    sum_of_errors = sum(error)
+    print("GCSE",  sum_of_errors)
     return best_pose, best_landmark, sum_of_errors 
