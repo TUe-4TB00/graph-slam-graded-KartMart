@@ -56,12 +56,12 @@ def optimize(graph, initial_estimate):
 #     best_landmark = 1    # chosen landmark (1 or 2)
 #     pose_5 = pose_options[best_pose]
 
-#     graph, initial_estimate = add_pose(graph, initial_estimate, pose_5) #update my stupid graph and intial estimate
+#     graph, initial_estimate = add_pose(graph, initial_estimate, pose_5) #update my graph and intial estimate
 
 
-#     result = optimize(graph, initial_estimate) #Optimizing the stupid graph so that the odometries are optimized and my stupid measurements align. this is related to X5
+#     result = optimize(graph, initial_estimate) #Optimizing the graph so that the odometries are optimized and my measurements align. this is related to X5
 
-#     graph = add_landmark_measurement(graph, result, pose_5, best_landmark) #Adding a stupid factor between my pose 5 and landmark
+#     graph = add_landmark_measurement(graph, result, pose_5, best_landmark) #Adding afactor between my pose 5 and landmark
     
 #     result = optimize(graph, initial_estimate) #W
 
@@ -82,12 +82,12 @@ def minimize_marginals(graph, initial_estimate, pose_options):
         best_landmark = 1    # chosen landmark (1 or 2)
         pose_5 = pose_options[best_pose]
 
-        graph, initial_estimate = add_pose(graph, initial_estimate, pose_5) #update my stupid graph and intial estimate
+        graph, initial_estimate = add_pose(graph, initial_estimate, pose_5) #update my graph and intial estimate
 
 
-        result = optimize(graph, initial_estimate) #Optimizing the stupid graph so that the odometries are optimized and my stupid measurements align. this is related to X5
+        result = optimize(graph, initial_estimate) #Optimizing the graph so that the odometries are optimized and my measurements align. this is related to X5
 
-        graph = add_landmark_measurement(graph, result, pose_5, best_landmark) #Adding a stupid factor between my pose 5 and landmark
+        graph = add_landmark_measurement(graph, result, pose_5, best_landmark) #Adding a factor between my pose 5 and landmark
         
         result = optimize(graph, initial_estimate) #W
 
